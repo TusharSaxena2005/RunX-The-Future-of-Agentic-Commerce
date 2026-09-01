@@ -1,0 +1,58 @@
+.merchant-dashboard-columns {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+    align-items: start;
+}
+
+.merchant-dashboard-column {
+    display: grid;
+    gap: 16px;
+    min-width: 0;
+}
+
+.merchant-dashboard-column .chart {
+    height: 200px;
+}
+
+@media (max-width: 1000px) {
+    .merchant-dashboard-columns {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+.growth-snapshot {
+    align-self: start;
+}
+
+.growth-snapshot-values .muted {
+    margin-bottom: 4px;
+    font-size: 12px;
+}
+
+.growth-snapshot-values h2:last-child {
+    margin-bottom: 0;
+}
+
+.revenue-bar-tooltip {
+    position: absolute;
+    z-index: 10;
+    width: max-content;
+    max-width: calc(100% - 16px);
+    padding: 10px 14px;
+    border: 1px solid var(--border, #d8e0ea);
+    border-radius: 8px;
+    background: var(--surface, #fff);
+    color: var(--text, #17334e);
+    box-shadow: 0 4px 16px #0002;
+    pointer-events: none;
+    font-size: 13px;
+}
+
+html[data-theme='dark'] .revenue-bar-tooltip,
+html[data-theme='dark'] .recharts-default-tooltip {
+    background: #153b5f !important;
+    border-color: #4a87b2 !important;
+    color: #eff8ff !important;
+}

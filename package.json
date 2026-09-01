@@ -1,0 +1,24 @@
+{
+  "name": "ai-commerce",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace client\" \"npm run dev --workspace server\"",
+    "build": "npm run build --workspace client",
+    "db:push": "npm run db:push --workspace server",
+    "db:seed": "npm run db:seed --workspace server",
+    "db:seed-demo-activity": "npm run db:seed-demo-activity --workspace server",
+    "db:update-catalog": "npm run db:update-catalog --workspace server",
+    "db:reset-demo": "npm run db:reset-demo --workspace server",
+    "start": "npm run start --workspace server",
+    "test": "npm run test --workspace server",
+    "test:integration": "npm run test:integration --workspace server",
+    "db:generate": "npm run db:generate --workspace server"
+  },
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

@@ -1,0 +1,194 @@
+/* Light theme: cream surfaces + blue contrast */
+:root {
+    --surface: #fffdf8;
+    --surface-soft: #f6f0e6;
+    --surface-muted: #eef4f8;
+    --border: #e5dccf;
+    --text: #17334e;
+    --muted: #6f7e8e;
+    --navy: #123a5d;
+    --navy-soft: #1f537f;
+    --blue-soft: #e7f2fb;
+    --chart-accent: #2d6f9f;
+    --chart-hover: rgba(45, 111, 159, 0.12);
+}
+
+body {
+    background: #f5efe5;
+    color: var(--text);
+}
+
+main {
+    background: #f5efe5;
+}
+
+.panel,
+.metric,
+.product-card {
+    background: var(--surface);
+    border-color: var(--border);
+}
+
+.panel h2,
+.metric strong,
+.product-card h3 {
+    color: var(--text);
+}
+
+.primary {
+    background: var(--navy);
+}
+
+.primary:hover {
+    background: var(--navy-soft);
+}
+
+.secondary,
+.pill,
+.profile-pill,
+.icon-button {
+    background: var(--surface);
+    border-color: #d8d0c2;
+    color: var(--text);
+}
+
+.secondary:hover,
+.icon-button:hover {
+    background: var(--blue-soft);
+}
+
+.composer input,
+.field input {
+    background: #fffaf2;
+    border-color: #d8d0c2;
+    color: var(--text);
+}
+
+.bubble.ai {
+    background: var(--surface-soft);
+}
+
+.bubble.user {
+    background: #dcecf9;
+}
+
+.product-card p,
+.muted {
+    color: var(--muted);
+}
+
+html[data-theme='dark'] body,
+html[data-theme='dark'] main {
+    background: #08182a;
+    color: #e5f0fa;
+}
+
+html[data-theme='dark'] .panel,
+html[data-theme='dark'] .metric,
+html[data-theme='dark'] .product-card,
+html[data-theme='dark'] .modal-card {
+    background: #0f2942;
+    border-color: #214869;
+    color: #e6f1fa;
+}
+
+html[data-theme='dark'] .panel h2,
+html[data-theme='dark'] .metric strong,
+html[data-theme='dark'] .product-card h3,
+html[data-theme='dark'] .products-title,
+html[data-theme='dark'] .modal-header h2 {
+    color: #edf6ff;
+}
+
+html[data-theme='dark'] .primary {
+    background: #2b6d9f;
+}
+
+html[data-theme='dark'] .primary:hover {
+    background: #347eB7;
+}
+
+html[data-theme='dark'] .secondary,
+html[data-theme='dark'] .pill,
+html[data-theme='dark'] .profile-pill,
+html[data-theme='dark'] .icon-button {
+    background: #153b5f;
+    border-color: #2b5c82;
+    color: #e5f2fc;
+}
+
+html[data-theme='dark'] .secondary:hover,
+html[data-theme='dark'] .icon-button:hover {
+    background: #1b4b75;
+}
+
+html[data-theme='dark'] .composer input,
+html[data-theme='dark'] .field input,
+html[data-theme='dark'] .field textarea {
+    background: #0a2137;
+    border-color: #2a597c;
+    color: #e6f1fa;
+}
+
+html[data-theme='dark'] .bubble.ai {
+    background: #123554;
+}
+
+html[data-theme='dark'] .bubble.user {
+    background: #1b4b75;
+}
+
+html[data-theme='dark'] .product-card p,
+html[data-theme='dark'] .muted,
+html[data-theme='dark'] header p {
+    color: #a9bfd1;
+}
+
+html[data-theme='dark'] .related-picker {
+    background: #0b2034;
+    border-color: #27516f;
+}
+
+html[data-theme='dark'] .related-option {
+    background: #112f4b;
+    border-color: #285473;
+    color: #deedf8;
+}
+
+html[data-theme='dark'] .related-option.selected {
+    background: #194b75;
+    border-color: #4b91c4;
+}
+
+html[data-theme='dark'] .modal-backdrop {
+    background: rgba(2, 12, 24, 0.72);
+}
+
+html[data-theme='dark'] .products-alert {
+    color: #dcebf7;
+}
+
+@media (max-width: 780px) {
+    .products-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chat-product-grid {
+        grid-template-columns: minmax(0, 220px);
+    }
+
+    .product-form .form-grid,
+    .related-options {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-card {
+        padding: 18px;
+    }
+}
+

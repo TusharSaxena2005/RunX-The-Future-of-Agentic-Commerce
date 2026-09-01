@@ -1,0 +1,250 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output = "../generated/client"
+}
+
+enum AgentActionType {
+  USER_REQUEST
+  SEARCH_PRODUCTS
+  PRODUCT_RECOMMENDATION
+  UPSELL
+  CREATE_CART
+  ADD_TO_CART
+  REMOVE_FROM_CART
+  CREATE_ORDER
+  ORDER_CALCULATION
+  POLICY_CHECK
+  DISCOUNT_REQUEST
+  POLICY_BLOCKED
+  RECOVERY_ACTION
+  PAYMENT_APPROVAL
+  RAZORPAY_ORDER_CREATED
+  PAYMENT_SUCCESS
+  PAYMENT_FAILED
+}
+
+enum ActionStatus {
+  SUCCESS
+  BLOCKED
+  FAILED
+  PENDING
+}
+
+enum OrderStatus {
+  CREATED
+  PENDING_PAYMENT
+  PAID
+  FAILED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  CREATED
+  AUTHORIZED
+  CAPTURED
+  FAILED
+  REFUNDED
+}
+
+enum StrategyType {
+  CROSS_SELL
+  HIGH_CONVERSION
+  CART_RECOVERY
+  BOUNDED_DISCOUNT
+}
+
+enum StrategyStatus {
+  PROPOSED
+  ACTIVE
+  PAUSED
+}
+
+model Merchant {
+  id String @id @default(cuid())
+  name String
+  createdAt DateTime @default(now())
+  products Product[]
+  policies Policy[]
+  carts Cart[]
+  orders Order[]
+  agentActions AgentAction[]
+  growthStrategies GrowthStrategy[]
+  salesEvents SalesEvent[]
+}
+
+model Product {
+  id String @id @default(cuid())
+  merchantId String
+  merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  name String
+  description String
+  category String
+  price Int
+  stock Int
+  image String
+  tags String[]
+  specifications Json
+  popularity Float @default(0)
+  conversionRate Float @default(0)
+  active Boolean @default(true)
+  createdAt DateTime @default(now())
+  cartItems CartItem[]
+  orderItems OrderItem[]
+  relatedFrom ProductRelation[] @relation("from")
+  relatedTo ProductRelation[] @relation("to")
+}
+
+model ProductRelation {
+  id String @id @default(cuid())
+  fromProductId String
+  toProductId String
+  score Float @default(0)
+  fromProduct Product @relation("from", fields: [fromProductId], references: [id], onDelete: Cascade)
+  toProduct Product @relation("to", fields: [toProductId], references: [id], onDelete: Cascade)
+  @@unique([fromProductId, toProductId])
+}
+
+model Customer {
+  id String @id @default(cuid())
+  email String?
+  name String?
+  createdAt DateTime @default(now())
+  carts Cart[]
+  orders Order[]
+}
+
+model Cart {
+  id String @id @default(cuid())
+  merchantId String
+  customerId String?
+  sessionId String @unique
+  merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  customer Customer? @relation(fields: [customerId], references: [id])
+  items CartItem[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  abandonedAt DateTime?
+}
+
+model CartItem {
+  id String @id @default(cuid())
+  cartId String
+  productId String
+  quantity Int
+  unitPrice Int
+  cart Cart @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+  @@unique([cartId, productId])
+}
+
+model Order {
+  id String @id @default(cuid())
+  merchantId String
+  customerId String?
+  cartId String?
+  subtotal Int
+  discount Int @default(0)
+  total Int
+  status OrderStatus @default(CREATED)
+  razorpayOrderId String?
+  paymentApprovedAt DateTime?
+  paymentMode String?
+  merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  customer Customer? @relation(fields: [customerId], references: [id])
+  items OrderItem[]
+  payments Payment[]
+  createdAt DateTime @default(now())
+}
+
+model OrderItem {
+  id String @id @default(cuid())
+  orderId String
+  productId String
+  quantity Int
+  unitPrice Int
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+}
+
+model Payment {
+  id String @id @default(cuid())
+  orderId String
+  razorpayPaymentId String?
+  razorpaySignature String?
+  amount Int
+  status PaymentStatus @default(CREATED)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}
+
+model Policy {
+  id String @id @default(cuid())
+  merchantId String @unique
+  maximumTransactionAmount Int @default(5000)
+  maximumDiscountPercentage Int @default(10)
+  maximumDiscountAmount Int @default(500)
+  paymentApprovalRequired Boolean @default(true)
+  aiRefundsAllowed Boolean @default(false)
+  aiPriceModificationAllowed Boolean @default(false)
+  merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  updatedAt DateTime @updatedAt
+}
+
+model AgentAction {
+  id String @id @default(cuid())
+  merchantId String
+  sessionId String
+  timestamp DateTime @default(now())
+  actor String
+  action AgentActionType
+  input Json?
+  output Json?
+  amount Int?
+  policyResult Json?
+  reason String?
+  status ActionStatus @default(SUCCESS)
+  merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  @@index([merchantId, timestamp])
+  @@index([sessionId, timestamp])
+}
+
+model GrowthStrategy {
+  id String @id @default(cuid())
+  merchantId String
+  type StrategyType
+  name String
+  description String
+  affectedProductIds String[]
+  status StrategyStatus @default(PROPOSED)
+  activationTime DateTime?
+  conversions Int @default(0)
+  additionalRevenue Int @default(0) // Legacy, excluded from reporting
+  estimatedConversions Int @default(0)
+  estimatedRevenue Int @default(0)
+  attributedRevenue Int @default(0)
+  attributedPurchases Int @default(0)
+  evidence Json?
+  confidence Float?
+  merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+}
+
+model SalesEvent {
+  id String @id @default(cuid())
+  merchantId String
+  timestamp DateTime
+  orderId String?
+  channel String
+  revenue Int
+  aov Int?
+  aiAttributed Boolean @default(false)
+  upsellRevenue Int @default(0)
+  converted Boolean @default(true)
+  merchant Merchant @relation(fields: [merchantId], references: [id], onDelete: Cascade)
+  @@index([merchantId, timestamp])
+}

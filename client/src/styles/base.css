@@ -1,0 +1,206 @@
+:root {
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    color: #17202d;
+    background: #f5f7fb;
+    line-height: 1.45;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+.app {
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    min-height: 100vh;
+}
+
+.sidebar {
+    background: #10141c;
+    color: #dbe4ef;
+    padding: 22px 16px;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100vh;
+    height: 100dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+main {
+    padding: 28px 34px;
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+}
+
+h1 {
+    font-size: 28px;
+    margin: 0 0 4px;
+    color: inherit;
+}
+
+header p {
+    margin: 0;
+    color: #718096;
+}
+
+.brand {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 6px 8px 24px;
+}
+
+.logo {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #74e0b5, #4c88ff);
+    color: #0d1721;
+    font-weight: 900;
+    display: grid;
+    place-items: center;
+}
+
+.brand b {
+    display: block;
+}
+
+.brand span {
+    display: block;
+    color: #8190a4;
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+nav {
+    display: grid;
+    gap: 5px;
+}
+
+nav a {
+    color: #94a2b5;
+    text-decoration: none;
+    padding: 10px 11px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+nav a.active,
+nav a:hover {
+    background: #1c2430;
+    color: #fff;
+}
+
+.side-note {
+    margin-top: auto;
+    background: #171d27;
+    border: 1px solid #252d39;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.side-note strong {
+    font-size: 11px;
+    color: #7fe2b8;
+}
+
+.side-note p {
+    color: #8997a8;
+    font-size: 11px;
+    margin: 6px 0 0;
+}
+
+.pill {
+    background: #fff;
+    border: 1px solid #dce3ed;
+    padding: 9px 13px;
+    border-radius: 999px;
+    color: #344154;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.grid {
+    display: grid;
+    gap: 16px;
+}
+
+.metrics {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.metric {
+    background: #fff;
+    border: 1px solid #e1e7ef;
+    border-radius: 16px;
+    padding: 18px;
+}
+
+.metric span {
+    display: block;
+    color: #77859a;
+    font-size: 12px;
+}
+
+.metric strong {
+    display: block;
+    font-size: 24px;
+    margin-top: 8px;
+}
+
+.metric small {
+    color: #16996c;
+    font-size: 12px;
+}
+
+.panel {
+    background: #fff;
+    border: 1px solid #e1e7ef;
+    border-radius: 16px;
+    padding: 18px;
+}
+
+.panel h2 {
+    font-size: 16px;
+    margin: 0 0 14px;
+}
+
+.two {
+    grid-template-columns: 2fr 1fr;
+}
+
+.three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+

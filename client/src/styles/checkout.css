@@ -1,0 +1,109 @@
+.payment-approval-card {
+    margin-top: 16px;
+    padding: 18px;
+    border: 1px solid var(--border, #c9d8eb);
+    border-radius: 16px;
+    background: var(--surface-soft, #eef6ff);
+}
+
+.chat-checkout {
+    margin: 12px 0;
+    max-width: 680px;
+}
+
+.chat-checkout-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    text-align: left;
+}
+
+.chat-checkout .payment-approval-card {
+    margin-top: 8px;
+}
+
+.chat-checkout .payment-item > span,
+.chat-checkout p {
+    overflow-wrap: anywhere;
+}
+
+.shop-app .chat > .prompt-row {
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+.shop-app .chat > .prompt-row button {
+    flex-shrink: 0;
+}
+
+.payment-approval-card h3 {
+    margin: 5px 0 4px;
+    font-size: 19px;
+}
+
+.payment-approval-card .eyebrow {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: #2f6fae;
+}
+
+.payment-items {
+    margin-top: 14px;
+    padding: 10px 0;
+    border-top: 1px solid var(--border, #c9d8eb);
+    border-bottom: 1px solid var(--border, #c9d8eb);
+}
+
+.payment-item,
+.payment-total {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 8px 0;
+}
+
+.payment-total {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.payment-result {
+    margin-top: 14px;
+}
+
+[data-theme='dark'] .payment-approval-card {
+    background: #102b48;
+    border-color: #255b87;
+}
+
+[data-theme='dark'] .payment-approval-card .eyebrow {
+    color: #9dd2ff;
+}
+
+[data-theme='dark'] .payment-items {
+    border-color: #255b87;
+}
+
+.payment-note {
+    font-size: 12px;
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+.payment-approval-card {
+    margin-top: 14px;
+    padding: 18px;
+    border: 1px solid #6ea8d7;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(220, 238, 252, 0.95), rgba(247, 240, 220, 0.92));
+}
+
+[data-theme='dark'] .payment-approval-card {
+    border-color: #6ea8d7;
+    background: linear-gradient(135deg, rgba(28, 65, 102, 0.96), rgba(39, 53, 80, 0.96));
+}

@@ -1,0 +1,168 @@
+/* Dark theme */
+html[data-theme='dark'] {
+    color-scheme: dark;
+    --chart-accent: #69baf2;
+    --chart-hover: rgba(105, 186, 242, 0.14);
+}
+
+html[data-theme='dark'] body {
+    background: #0c1118;
+    color: #e6edf5;
+}
+
+html[data-theme='dark'] main {
+    background: #0c1118;
+}
+
+html[data-theme='dark'] header p,
+html[data-theme='dark'] .muted {
+    color: #96a5b7;
+}
+
+html[data-theme='dark'] .panel,
+html[data-theme='dark'] .metric,
+html[data-theme='dark'] .product-card {
+    background: #131a23;
+    border-color: #293443;
+    color: #e6edf5;
+}
+
+html[data-theme='dark'] .panel h2,
+html[data-theme='dark'] .profile-hero h2,
+html[data-theme='dark'] .product-card h3,
+html[data-theme='dark'] .metric strong,
+html[data-theme='dark'] .ai-message-content strong,
+html[data-theme='dark'] .cart-empty h3 {
+    color: #f4f7fb;
+}
+
+html[data-theme='dark'] .icon-button,
+html[data-theme='dark'] .profile-pill,
+html[data-theme='dark'] .pill,
+html[data-theme='dark'] .secondary {
+    background: #151d27;
+    color: #dbe4ef;
+    border-color: #34404e;
+}
+
+html[data-theme='dark'] .icon-button:hover,
+html[data-theme='dark'] .secondary:hover {
+    background: #1c2632;
+}
+
+html[data-theme='dark'] .bubble.ai {
+    background: #17202b;
+}
+
+html[data-theme='dark'] .bubble.user {
+    background: #1b3149;
+}
+
+html[data-theme='dark'] .ai-message-content {
+    color: #d7e0ea;
+}
+
+html[data-theme='dark'] .composer {
+    border-top-color: #293443;
+}
+
+html[data-theme='dark'] .composer input,
+html[data-theme='dark'] .field input,
+html[data-theme='dark'] .profile-detail {
+    background: #111923;
+    color: #e6edf5;
+    border-color: #34404e;
+}
+
+html[data-theme='dark'] .product-card p,
+html[data-theme='dark'] header p {
+    color: #96a5b7;
+}
+
+html[data-theme='dark'] .cart-page-item,
+html[data-theme='dark'] .cart-empty,
+html[data-theme='dark'] .cart-page-icon,
+html[data-theme='dark'] .profile-detail-icon,
+html[data-theme='dark'] .cart-count {
+    background: #111923;
+    border-color: #293443;
+    color: #aebaca;
+}
+
+html[data-theme='dark'] .summary-total,
+html[data-theme='dark'] .table th,
+html[data-theme='dark'] .table td,
+html[data-theme='dark'] .cart-item,
+html[data-theme='dark'] .strategy {
+    border-color: #293443;
+}
+
+html[data-theme='dark'] .alert {
+    background: #2a2417;
+    border-color: #5f4d24;
+    color: #f2d48c;
+}
+
+html[data-theme='dark'] .alert.success {
+    background: #14261f;
+    border-color: #285d48;
+    color: #9be3bf;
+}
+
+html[data-theme='dark'] .alert.danger {
+    background: #2a1719;
+    border-color: #633036;
+    color: #f0a9ae;
+}
+
+html[data-theme='dark'] .profile-danger {
+    background: #131a23;
+}
+
+html[data-theme='dark'] .danger-button {
+    background: #2a1719;
+    border-color: #633036;
+    color: #f0a9ae;
+}
+
+html[data-theme='dark'] .profile-avatar {
+    background: linear-gradient(135deg, #20364c, #203d36);
+    color: #d6ecff;
+}
+
+html[data-theme='dark'] .ai-message-content code {
+    background: #0e151d;
+    border-color: #34404e;
+    color: #dce8f4;
+}
+
+html[data-theme='dark'] .ai-divider {
+    border-top-color: #34404e;
+}
+
+html[data-theme='dark'] .cart-page-icon {
+    background: #1a2632;
+    color: #bcd5ec;
+}
+
+@media (max-width: 1000px) {
+    .cart-page-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cart-summary {
+        position: static;
+    }
+
+    .profile-details {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-settings,
+    .profile-danger {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+

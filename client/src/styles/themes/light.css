@@ -1,0 +1,171 @@
+/* Warm cream-and-white light palette; dark theme retains its own colors. */
+html[data-theme='light'] {
+    --surface: #ffffff;
+    --surface-soft: #f7f2e9;
+    --surface-muted: #eee7dc;
+    --border: #e3d9cb;
+    --text: #3e372e;
+    --muted: #7a7063;
+    --navy: #75634c;
+    --navy-soft: #5f503d;
+    --blue-soft: #eee6d9;
+    --chart-accent: #968064;
+    --chart-hover: rgba(150, 128, 100, 0.12);
+    accent-color: #8c7556;
+}
+
+html[data-theme='light'] .sidebar {
+    background: #f7f2e9;
+    color: #3e372e;
+}
+
+html[data-theme='light'] .sidebar nav a,
+html[data-theme='light'] .sidebar .logout-button,
+html[data-theme='light'] .sidebar .account-meta strong {
+    color: #574c3e;
+}
+
+html[data-theme='light'] .sidebar nav a.active,
+html[data-theme='light'] .sidebar nav a:hover,
+html[data-theme='light'] .sidebar .logout-button:hover {
+    background: #eae0d0;
+    border-color: #d8cbb8;
+    color: #4e4030;
+}
+
+html[data-theme='light'] .sidebar .brand span,
+html[data-theme='light'] .sidebar .account-meta span,
+html[data-theme='light'] .sidebar .side-note p {
+    color: #7a7063;
+}
+
+html[data-theme='light'] :is(.logo, .avatar-small, .avatar, .bubble.user, .tag, .role-button.active, .related-option.selected) {
+    background: #eee4d5;
+    color: #5d4b34;
+    border-color: #d8cbb8;
+}
+
+html[data-theme='light'] .auth-page {
+    background: radial-gradient(ellipse at top left, #ffffff, #f4ecdf 75%);
+}
+
+html[data-theme='light'] :is(.field textarea, .related-option, .products-title, .modal-header h2) {
+    color: #3e372e;
+}
+
+html[data-theme='light'] .related-option input { accent-color: #8c7556; }
+
+html[data-theme='light'] .chat-toolbar .ai-pick-mode-bar,
+html[data-theme='light'] .chat-toolbar .ai-pick-mode-bar.is-active,
+html[data-theme='light'] .chat-toolbar .clear-chat-button {
+    background: linear-gradient(110deg, #f4ecdf, #ffffff);
+    border-color: #dfd2c0;
+    color: #65543e;
+    box-shadow: none;
+}
+
+html[data-theme='light'] .chat-toolbar .clear-chat-button:hover:not(:disabled) {
+    background: #eee3d2;
+    border-color: #c9b79d;
+    box-shadow: none;
+}
+
+html[data-theme='light'] .ai-pick-icon,
+html[data-theme='light'] .is-active .ai-pick-icon {
+    background: #e6d8c2;
+    color: #6b5638;
+    box-shadow: none;
+}
+
+html[data-theme='light'] .ai-pick-mode-copy > strong { color: #57462f; }
+html[data-theme='light'] .ai-pick-mode-copy > span {
+    color: #7a7063;
+    border-color: #dacdbb;
+}
+
+html[data-theme='light'] .mode-toggle {
+    background: #e9e1d5;
+    border-color: #cebfaa;
+    color: #6b5a43;
+}
+
+html[data-theme='light'] .mode-toggle.active {
+    background: #8c7556;
+    border-color: #8c7556;
+    color: #fff;
+}
+
+html[data-theme='light'] .mode-toggle:hover:not(:disabled) {
+    box-shadow: 0 0 0 3px rgb(140 117 86 / 12%);
+}
+
+html[data-theme='light'] :is(button, a, input, textarea, select):focus-visible {
+    outline-color: #8c7556;
+    border-color: #b5a082;
+    box-shadow: 0 0 0 3px rgb(140 117 86 / 12%);
+}
+
+html[data-theme='light'] .auth-shell {
+    background: #fff;
+    border-color: #e3d9cb;
+    box-shadow: 0 24px 70px rgb(92 74 48 / 10%);
+}
+
+html[data-theme='light'] .auth-visual {
+    background: radial-gradient(circle at top right, #fffdf8, transparent 65%), #f2e8d9;
+    color: #43392d;
+}
+
+html[data-theme='light'] .auth-card {
+    background: #fff;
+    color: #43392d;
+}
+
+html[data-theme='light'] .auth-chip {
+    background: #fffaf2;
+    border-color: #d9c9b2;
+    color: #79603d;
+}
+
+html[data-theme='light'] .auth-flow > div {
+    background: #fffdf8;
+    border-color: #e0d3c1;
+}
+
+html[data-theme='light'] .auth-page :is(.auth-flow span, .auth-eyebrow, .password-toggle) {
+    color: #856b47;
+}
+
+html[data-theme='light'] .auth-page :is(.auth-brand span, .auth-visual p, .auth-demo-note, .auth-card-header > p:last-child, .auth-footnote, .demo-credentials span, .role-button) {
+    color: #7b7062;
+}
+
+html[data-theme='light'] .auth-page :is(.field label, .demo-credentials strong) {
+    color: #4f4334;
+}
+
+html[data-theme='light'] .auth-page .role-switch {
+    background: #f3ece1;
+}
+
+html[data-theme='light'] .auth-page .role-button.active {
+    background: #fff;
+    color: #655035;
+    box-shadow: 0 2px 8px rgb(92 74 48 / 8%);
+}
+
+html[data-theme='light'] .auth-page .demo-credentials {
+    background: #faf5ed;
+    border-color: #e3d9cb;
+}
+
+html[data-theme='light'] .auth-page .field input {
+    background: #fffdf9;
+    border-color: #ded3c4;
+    color: #43392d;
+}
+
+html[data-theme='light'] .auth-page .field input:focus {
+    border-color: #b5a082;
+    box-shadow: 0 0 0 3px rgb(140 117 86 / 12%);
+}

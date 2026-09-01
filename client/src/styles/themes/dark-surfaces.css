@@ -1,0 +1,71 @@
+/* Dark theme surface hierarchy: no white cards or controls. */
+html[data-theme='dark'] .audit-summary-card,
+html[data-theme='dark'] .audit-event-content,
+html[data-theme='dark'] .audit-detail,
+html[data-theme='dark'] .cart-page-item,
+html[data-theme='dark'] .cart-empty,
+html[data-theme='dark'] .profile-detail,
+html[data-theme='dark'] .pc-bottom button {
+    background: #102f4c;
+    border-color: #2b5f86;
+    color: #e8f4ff;
+}
+
+html[data-theme='dark'] .audit-summary-warning,
+html[data-theme='dark'] .audit-reason {
+    background: #173a59;
+    border-color: #3a7198;
+}
+
+html[data-theme='dark'] .audit-filter {
+    background: #123654;
+    border-color: #2b5f86;
+    color: #c7def0;
+}
+
+html[data-theme='dark'] .audit-filter:hover {
+    background: #194b75;
+}
+
+html[data-theme='dark'] .audit-filter.active {
+    background: #2d75aa;
+    border-color: #65a9d8;
+    color: #f4faff;
+}
+
+html[data-theme='dark'] .audit-event-marker,
+html[data-theme='dark'] .cart-page-icon,
+html[data-theme='dark'] .profile-detail-icon,
+html[data-theme='dark'] .cart-count {
+    background: #194565;
+    border-color: #36769f;
+    color: #d9edfc;
+}
+
+html[data-theme='dark'] .audit-summary-card strong,
+html[data-theme='dark'] .audit-event-title-row h3,
+html[data-theme='dark'] .audit-event-time strong,
+html[data-theme='dark'] .audit-detail strong,
+html[data-theme='dark'] .audit-amount strong {
+    color: #eff8ff;
+}
+
+html[data-theme='dark'] .audit-summary-card span,
+html[data-theme='dark'] .audit-summary-card small,
+html[data-theme='dark'] .audit-toolbar p,
+html[data-theme='dark'] .audit-event-description,
+html[data-theme='dark'] .audit-event-time span,
+html[data-theme='dark'] .audit-reason p {
+    color: #b2cbe0;
+}
+
+html[data-theme='dark'] .audit-toolbar,
+html[data-theme='dark'] .audit-amount,
+html[data-theme='dark'] .audit-timeline::before {
+    border-color: #2b5f86;
+}
+
+html[data-theme='dark'] .audit-timeline::before {
+    background: #2b5f86;
+}
+

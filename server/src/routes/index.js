@@ -1,0 +1,23 @@
+import { Router } from 'express';
+import { paymentRoutes } from './paymentsRoutes.js';
+import { merchantRoutes } from './merchantRoutes.js';
+import { productsRoutes } from './productsRoutes.js';
+import { policiesRoutes } from './policiesRoutes.js';
+import { agentRoutes } from './agentRoutes.js';
+import { cartRoutes } from './cartRoutes.js';
+import { ordersRoutes } from './ordersRoutes.js';
+import { analyticsRoutes } from './analyticsRoutes.js';
+import { growthRoutes } from './growthRoutes.js';
+import { auditRoutes } from './auditRoutes.js';
+
+export const router = Router();
+router.use('/payments', paymentRoutes);
+router.use(merchantRoutes);
+router.use(productsRoutes);
+router.use(policiesRoutes);
+router.use(agentRoutes);
+router.use(cartRoutes);
+router.use(ordersRoutes);
+router.use(analyticsRoutes);
+router.use(growthRoutes);
+router.use(auditRoutes);

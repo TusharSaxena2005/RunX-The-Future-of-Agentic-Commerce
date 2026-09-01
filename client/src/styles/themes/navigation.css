@@ -1,0 +1,177 @@
+/* Sidebar follows the selected theme, including navigation and account details. */
+html[data-theme='light'] .sidebar {
+    background: #f7f3ec;
+    color: #243b53;
+    border-right: 1px solid #e2d9cb;
+}
+
+html[data-theme='light'] .sidebar nav a {
+    color: #53677b;
+}
+
+html[data-theme='light'] .sidebar nav a:hover {
+    background: #e9edf2;
+    color: #244e77;
+}
+
+html[data-theme='light'] .sidebar nav a.active {
+    background: #dce9f7;
+    color: #194f80;
+}
+
+html[data-theme='light'] .sidebar .account-card,
+html[data-theme='light'] .sidebar .side-note {
+    background: #fffdf8;
+    border-color: #e2d9cb;
+}
+
+html[data-theme='light'] .sidebar .account-meta strong {
+    color: #243b53;
+}
+
+html[data-theme='light'] .sidebar .brand span,
+html[data-theme='light'] .sidebar .account-meta span,
+html[data-theme='light'] .sidebar .side-note p {
+    color: #65758a;
+}
+
+html[data-theme='light'] .sidebar .side-note strong {
+    color: #246a59;
+}
+
+html[data-theme='light'] .sidebar .logout-button {
+    background: #fffdf8;
+    border-color: #d9d0c3;
+    color: #38516a;
+}
+
+html[data-theme='light'] .sidebar .logout-button:hover {
+    background: #e5edf6;
+    border-color: #b7cbe0;
+}
+
+/* Strong blue / cream contrast across the entire application */
+.sidebar {
+    background: #0d2a45;
+    color: #e2effa;
+}
+
+nav a {
+    color: #9eb8cf;
+}
+
+nav a.active,
+nav a:hover {
+    background: #17456e;
+    color: #f2f8fd;
+}
+
+.side-note,
+.account-card {
+    background: #103451;
+    border-color: #285779;
+}
+
+.logout-button {
+    background: #0b233b;
+    border-color: #2a5777;
+    color: #dcebf7;
+}
+
+.logout-button:hover {
+    background: #15486f;
+}
+
+.auth-page {
+    background:
+        radial-gradient(circle at 15% 20%, rgba(76, 136, 255, 0.14), transparent 34%),
+        radial-gradient(circle at 90% 80%, rgba(183, 155, 108, 0.12), transparent 28%),
+        #f5efe5;
+}
+
+.auth-shell {
+    background: #fffdf8;
+    border-color: #e2d8c8;
+}
+
+.auth-card {
+    background: #fffdf8;
+}
+
+.role-switch {
+    background: #f0e9dd;
+}
+
+.role-button.active {
+    background: #fffdf8;
+    color: #123a5d;
+}
+
+.demo-credentials {
+    background: #f7f1e8;
+    border-color: #ded2c1;
+}
+
+html[data-theme='dark'] .sidebar {
+    background: #061a2b;
+    color: #deedf8;
+}
+
+html[data-theme='dark'] nav a {
+    color: #94b2ca;
+}
+
+html[data-theme='dark'] nav a.active,
+html[data-theme='dark'] nav a:hover {
+    background: #13466f;
+    color: #eff8ff;
+}
+
+html[data-theme='dark'] .side-note,
+html[data-theme='dark'] .account-card {
+    background: #0a2943;
+    border-color: #245373;
+}
+
+html[data-theme='dark'] .logout-button {
+    background: #08223a;
+    border-color: #2a5a7d;
+    color: #e1eef8;
+}
+
+html[data-theme='dark'] .logout-button:hover {
+    background: #12466e;
+}
+
+html[data-theme='dark'] .auth-page {
+    background:
+        radial-gradient(circle at 15% 20%, rgba(76, 136, 255, 0.16), transparent 34%),
+        radial-gradient(circle at 90% 80%, rgba(52, 111, 160, 0.18), transparent 30%),
+        #061a2b;
+}
+
+html[data-theme='dark'] .auth-shell,
+html[data-theme='dark'] .auth-card {
+    background: #0f2942;
+    border-color: #245373;
+    color: #e6f1fa;
+}
+
+html[data-theme='dark'] .role-switch {
+    background: #0a2137;
+}
+
+html[data-theme='dark'] .role-button {
+    color: #9db6cb;
+}
+
+html[data-theme='dark'] .role-button.active {
+    background: #153b5f;
+    color: #eff8ff;
+}
+
+html[data-theme='dark'] .demo-credentials {
+    background: #0b2034;
+    border-color: #28516d;
+}
+

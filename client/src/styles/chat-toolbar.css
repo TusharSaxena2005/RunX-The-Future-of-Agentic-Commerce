@@ -1,0 +1,65 @@
+/* Compact AI mode control: one line, with a distinct active state. */
+.chat-toolbar .ai-pick-mode-bar {
+    gap: 10px;
+    border-color: #d7e2ef;
+    background: linear-gradient(110deg, #f0f5fc, #fafcff 75%);
+    box-shadow: 0 1px 3px rgb(29 65 110 / 4%);
+}
+
+.chat-toolbar .ai-pick-mode-bar.is-active {
+    border-color: #b4cbee;
+    background: linear-gradient(110deg, #e9f0ff, #f5f8ff 65%, #edf7fc);
+    box-shadow: 0 2px 6px rgb(47 86 151 / 6%);
+}
+
+.ai-pick-icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 28px;
+    height: 28px;
+    border-radius: 8px;
+    background: #e1eafa;
+    color: #426eb0;
+}
+
+.is-active .ai-pick-icon {
+    background: linear-gradient(135deg, #547fd1, #6b6ac8);
+    color: #fff;
+    box-shadow: 0 2px 4px rgb(78 105 177 / 16%);
+}
+
+.ai-pick-mode-copy > strong {
+    color: #294978;
+    font-size: 13px;
+    font-weight: 650;
+    letter-spacing: -0.15px;
+}
+
+.ai-pick-mode-copy > span {
+    border-left: 1px solid #ccd9ec;
+    padding-left: 10px;
+    color: #667991;
+}
+
+html[data-theme='dark'] .chat-toolbar .ai-pick-mode-bar {
+    border-color: #304b6b;
+    background: linear-gradient(110deg, #172e49, #14273d);
+}
+
+html[data-theme='dark'] .chat-toolbar .ai-pick-mode-bar.is-active {
+    border-color: #4b6c9a;
+    background: linear-gradient(110deg, #24395e, #172d46);
+    box-shadow: none;
+}
+
+html[data-theme='dark'] .ai-pick-icon {
+    background: #2b4367;
+    color: #c0d5ff;
+}
+
+html[data-theme='dark'] .ai-pick-mode-copy > strong { color: #e1ebff; }
+html[data-theme='dark'] .ai-pick-mode-copy > span {
+    border-color: #3a5273;
+    color: #a6bbd4;
+}
+
