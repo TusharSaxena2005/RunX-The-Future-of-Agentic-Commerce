@@ -30,6 +30,7 @@ export const api = {
     login: body => request('/auth/login', { method: 'POST', body: JSON.stringify(body) }),
     logout: () => request('/auth/logout', { method: 'POST' }),
     verifyPayment: body => request('/payments/verify', { method: 'POST', body: JSON.stringify(body) }),
+    cancelPayment: body => request('/payments/cancel', { method: 'POST', body: JSON.stringify(body) }),
     chat: (body, signal) =>
         request('/agent/chat', {
             method: 'POST',

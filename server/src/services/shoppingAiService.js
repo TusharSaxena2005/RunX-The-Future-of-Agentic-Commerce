@@ -63,7 +63,11 @@ async function callGemini({ apiKey, model, systemInstruction, contents, signal }
         contents,
         tools: [toolConfig],
         toolConfig: { functionCallingConfig: { mode: 'AUTO' } },
-        generationConfig: { temperature: 0.2, maxOutputTokens: 700 }
+        generationConfig: {
+          temperature: 0.2,
+          maxOutputTokens: 2048,
+          thinkingConfig: { thinkingLevel: 'minimal' }
+        }
       })
     }
   );

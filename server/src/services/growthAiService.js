@@ -262,6 +262,7 @@ async function generateAiGrowthOpportunities(snapshot) {
           // Structured responses can be cut off mid-JSON when this budget is too
           // small. The previous 1,800-token cap caused intermittent parse errors.
           maxOutputTokens: 4096,
+          thinkingConfig: { thinkingLevel: 'minimal' },
           responseMimeType: 'application/json',
           responseSchema: {
             type: 'OBJECT',

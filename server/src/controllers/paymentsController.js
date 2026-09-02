@@ -42,15 +42,50 @@ export const preparePayment = async (req, res) => {
             }
             await tx.order.update({ where: { id: order.id }, data: { razorpayOrderId: razorpay.id, paymentApprovedAt: current.paymentApprovedAt || new Date(), paymentMode: razorpay.demo ? 'SIMULATED' : 'RAZORPAY_TEST' } });
             if (!current.paymentApprovedAt) {
-                for (const action of ['PAYMENT_APPROVAL', 'RAZORPAY_ORDER_CREATED']) await tx.agentAction.create({ data: {
+                for (const action of ['PAYMENT_APPROVAL', 'RAZORPAY_ORDER_CREATED', 'PAYMENT_PENDING']) await tx.agentAction.create({ data: {
                     merchantId: order.merchantId, sessionId: req.auth.sessionId, actor: action === 'PAYMENT_APPROVAL' ? 'CUSTOMER' : (razorpay.demo ? 'SIMULATOR' : 'RAZORPAY'),
                     action, amount: order.total, input: { orderId: order.id }, output: { approved: true, razorpayOrderId: razorpay.id, demo: Boolean(razorpay.demo) }, policyResult: policy,
+                    status: action === 'PAYMENT_PENDING' ? 'PENDING' : 'SUCCESS',
+                } });
+            } else {
+                const pending = await tx.agentAction.updateMany({
+                    where: { merchantId: order.merchantId, action: 'PAYMENT_PENDING', input: { path: ['orderId'], equals: order.id } },
+                    data: { status: 'PENDING', reason: null },
+                });
+                if (!pending.count) await tx.agentAction.create({ data: {
+                    merchantId: order.merchantId, sessionId: req.auth.sessionId, actor: razorpay.demo ? 'SIMULATOR' : 'RAZORPAY',
+                    action: 'PAYMENT_PENDING', amount: order.total, input: { orderId: order.id },
+                    output: { razorpayOrderId: razorpay.id, demo: Boolean(razorpay.demo) }, status: 'PENDING',
                 } });
             }
             return { order, policy, razorpay: { ...razorpay, keyId: publicKey(), configured: configured(), demo: Boolean(razorpay.demo) } };
         }, { timeout: 20000 });
         res.json(result);
     } catch (error) { await failed(order, req, error); res.status(400).json({ error: error.message }); }
+};
+
+export const cancelPayment = async (req, res) => {
+    try {
+        const order = await ownedOrder(req);
+        if (order.status !== 'PENDING_PAYMENT' || !order.paymentApprovedAt) {
+            return res.status(409).json({ error: 'Order is not awaiting payment' });
+        }
+        const reason = 'Customer closed Razorpay checkout before payment was completed.';
+        await prisma.$transaction(async tx => {
+            const cancelled = await tx.agentAction.updateMany({
+                where: { merchantId: order.merchantId, action: 'PAYMENT_PENDING', input: { path: ['orderId'], equals: order.id } },
+                data: { status: 'CANCELLED', reason },
+            });
+            if (!cancelled.count) await tx.agentAction.create({ data: {
+                merchantId: order.merchantId, sessionId: req.auth.sessionId, actor: 'CUSTOMER',
+                action: 'PAYMENT_PENDING', amount: order.total, input: { orderId: order.id },
+                output: { razorpayOrderId: order.razorpayOrderId }, status: 'CANCELLED', reason,
+            } });
+        });
+        res.json({ cancelled: true, orderStatus: order.status });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
 };
 
 export const verifyPayment = async (req, res) => {

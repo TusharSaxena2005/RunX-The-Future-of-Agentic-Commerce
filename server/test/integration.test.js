@@ -116,6 +116,13 @@ test('isolated PostgreSQL commerce safety scenarios', { timeout: 120000 }, async
             for (const result of results) { assert.equal(result.status, 200); assert.equal(result.data.razorpay.amount, 90000); }
             assert.equal(results[0].data.razorpay.id, results[1].data.razorpay.id);
             assert.equal(await prisma.agentAction.count({ where: { action: 'PAYMENT_APPROVAL' } }), 1);
+            assert.equal(await prisma.agentAction.count({ where: { action: 'RAZORPAY_ORDER_CREATED', status: 'SUCCESS' } }), 1);
+            assert.equal(await prisma.agentAction.count({ where: { action: 'PAYMENT_PENDING', status: 'PENDING' } }), 1);
+            assert.equal((await request('/payments/cancel', customer.token, { orderId: order.id })).status, 200);
+            assert.equal(await prisma.agentAction.count({ where: { action: 'PAYMENT_PENDING', status: 'CANCELLED' } }), 1);
+            assert.equal((await prisma.order.findUnique({ where: { id: order.id } })).status, 'PENDING_PAYMENT');
+            assert.equal((await request('/payments/prepare', customer.token, { orderId: order.id, approved: true })).status, 200);
+            assert.equal(await prisma.agentAction.count({ where: { action: 'PAYMENT_PENDING', status: 'PENDING' } }), 1);
         });
         await t.test('simulation blocked when keys are configured', async () => {
             process.env.RAZORPAY_KEY_ID = 'rzp_test_fixture';
@@ -132,6 +139,7 @@ test('isolated PostgreSQL commerce safety scenarios', { timeout: 120000 }, async
             const updated = await prisma.growthStrategy.findUnique({ where: { id: strategy.id } });
             assert.equal(updated.attributedPurchases, 1); assert.equal(updated.attributedRevenue, 180);
             assert.equal(await prisma.agentAction.count({ where: { action: 'PAYMENT_SUCCESS' } }), 1);
+            assert.equal(await prisma.agentAction.count({ where: { action: 'PAYMENT_PENDING', status: 'SUCCESS' } }), 1);
         });
         await t.test('dashboard calculates rates from recorded carts and cross-sell purchases', async () => {
             const result = await request('/analytics', admin.token);

@@ -205,6 +205,12 @@
     color: #8a5a00;
 }
 
+.audit-status.cancelled {
+    background: #f2f4f7;
+    border: 1px solid #d7dce2;
+    color: #596273;
+}
+
 .audit-status.blocked {
     background: #fff0f0;
     border: 1px solid #ffc9c9;
@@ -421,5 +427,4 @@
         margin-left: 0;
     }
 }
-
 

@@ -500,6 +500,7 @@ export default function Shop() {
         if (!approvalInput) return;
 
         const approval = approvalInput;
+        let paymentCompleted = false;
         const options = {
             key: approval.razorpay.keyId,
             amount: approval.razorpay.amount,
@@ -515,6 +516,7 @@ export default function Shop() {
                         signature: response.razorpay_signature,
                         sessionId: sid,
                     });
+                    paymentCompleted = true;
 
                     setPaymentApproval(null);
                     setPendingCheckoutOrder(null);
@@ -533,7 +535,10 @@ export default function Shop() {
                 }
             },
             modal: {
-                ondismiss: () => {
+                ondismiss: async () => {
+                    if (!paymentCompleted) {
+                        try { await api.cancelPayment({ orderId: approval.order.id }); } catch { /* The order remains safely pending if cancellation reporting fails. */ }
+                    }
                     setPaying(false);
                     setError('Payment window was closed before the payment was completed.');
                 },

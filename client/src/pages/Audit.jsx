@@ -78,9 +78,14 @@ const ACTION_META = {
         description: 'The customer approved the payment after policy checks.',
     },
     RAZORPAY_ORDER_CREATED: {
-        label: 'Payment order created',
+        label: 'Checkout prepared',
         icon: '💳',
-        description: 'A Razorpay test order was created.',
+        description: 'Razorpay checkout was prepared successfully. This does not mean payment was completed.',
+    },
+    PAYMENT_PENDING: {
+        label: 'Payment status',
+        icon: '⏳',
+        description: 'Waiting for Razorpay payment verification.',
     },
     PAYMENT_SUCCESS: {
         label: 'Payment successful',
@@ -212,7 +217,20 @@ function statusClass(status) {
         return 'audit-status pending';
     }
 
+    if (value === 'CANCELLED') {
+        return 'audit-status cancelled';
+    }
+
     return 'audit-status success';
+}
+
+function displayStatus(item, completedOrderIds = new Set()) {
+    if (item.action === 'RAZORPAY_ORDER_CREATED') return 'SUCCESS';
+    if (item.action === 'PAYMENT_PENDING') {
+        if (String(item.status).toUpperCase() === 'CANCELLED') return 'CANCELLED';
+        return completedOrderIds.has(item.input?.orderId) ? 'SUCCESS' : 'PENDING';
+    }
+    return item.status || 'SUCCESS';
 }
 
 export default function Audit() {
@@ -270,6 +288,7 @@ export default function Audit() {
                 [
                     'PAYMENT_APPROVAL',
                     'RAZORPAY_ORDER_CREATED',
+                    'PAYMENT_PENDING',
                     'PAYMENT_SUCCESS',
                     'PAYMENT_FAILED',
                 ].includes(item.action)
@@ -287,9 +306,14 @@ export default function Audit() {
         return actions;
     }, [actions, filter]);
 
-    const successfulCount = actions.filter(
-        (item) => !String(item.status).toUpperCase().includes('BLOCK') &&
-            String(item.status).toUpperCase() !== 'FAILED'
+    const completedOrderIds = useMemo(() => new Set(
+        actions
+            .filter((item) => item.action === 'PAYMENT_SUCCESS' && item.input?.orderId)
+            .map((item) => item.input.orderId)
+    ), [actions]);
+
+    const successfulCount = actions.filter((item) =>
+        displayStatus(item, completedOrderIds) === 'SUCCESS'
     ).length;
 
     const blockedCount = actions.filter(
@@ -302,6 +326,7 @@ export default function Audit() {
         [
             'PAYMENT_APPROVAL',
             'RAZORPAY_ORDER_CREATED',
+            'PAYMENT_PENDING',
             'PAYMENT_SUCCESS',
             'PAYMENT_FAILED',
         ].includes(item.action)
@@ -395,6 +420,12 @@ export default function Audit() {
                             const details = buildDetails(item);
                             const amount = formatAmount(item.amount);
                             const isExpanded = expanded === item.id;
+                            const shownStatus = displayStatus(item, completedOrderIds);
+                            const shownDescription = item.action === 'PAYMENT_PENDING' && shownStatus === 'SUCCESS'
+                                ? 'Razorpay payment was verified successfully.'
+                                : item.action === 'PAYMENT_PENDING' && shownStatus === 'CANCELLED'
+                                ? 'Customer closed Razorpay checkout before completing payment.'
+                                : meta.description;
 
                             return (
                                 <article className="audit-event" key={item.id}>
@@ -407,13 +438,13 @@ export default function Audit() {
                                             <div>
                                                 <div className="audit-event-title-row">
                                                     <h3>{meta.label}</h3>
-                                                    <span className={statusClass(item.status)}>
-                                                        {item.status || 'SUCCESS'}
+                                                    <span className={statusClass(shownStatus)}>
+                                                        {shownStatus}
                                                     </span>
                                                 </div>
 
                                                 <p className="audit-event-description">
-                                                    {meta.description}
+                                                    {shownDescription}
                                                 </p>
                                             </div>
 

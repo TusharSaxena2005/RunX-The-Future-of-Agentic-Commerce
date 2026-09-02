@@ -50,6 +50,16 @@ export async function finalizePayment({ orderId, paymentId, signature, demo = fa
             }
             await tx.cart.update({ where: { id: cart.id }, data: { updatedAt: new Date() } });
         }
+        // Checkout preparation is already successful. Promote the separate
+        // payment-status step only after this exact commerce order is verified.
+        await tx.agentAction.updateMany({
+            where: {
+                merchantId: order.merchantId,
+                action: 'PAYMENT_PENDING',
+                input: { path: ['orderId'], equals: order.id },
+            },
+            data: { status: 'SUCCESS' },
+        });
         await tx.agentAction.create({ data: {
             merchantId: order.merchantId, sessionId, actor: demo ? 'SIMULATOR' : 'RAZORPAY',
             action: 'PAYMENT_SUCCESS', amount: order.total,

@@ -94,6 +94,7 @@ export default function Cart() {
     }
 
     function openCheckout(approval) {
+        let paymentCompleted = false;
         const options = {
             key: approval.razorpay.keyId,
             amount: approval.razorpay.amount,
@@ -109,6 +110,7 @@ export default function Cart() {
                         signature: response.razorpay_signature,
                         sessionId: sid,
                     });
+                    paymentCompleted = true;
 
                     setApproval(null);
                     await refresh();
@@ -122,7 +124,10 @@ export default function Cart() {
                 }
             },
             modal: {
-                ondismiss: () => {
+                ondismiss: async () => {
+                    if (!paymentCompleted) {
+                        try { await api.cancelPayment({ orderId: approval.order.id }); } catch { /* The order remains safely pending if cancellation reporting fails. */ }
+                    }
                     setPaying(false);
                     setError('Payment window was closed before the payment was completed.');
                 },
